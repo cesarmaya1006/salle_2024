@@ -23,7 +23,11 @@ class AdminSis
 
     private function permiso()
     {
-        return in_array('Super Administrador',session('roles'));
+        $rolArray = [];
+        foreach (session('roles') as $rol) {
+            $rolArray[] = $rol['name'];
+        }
+        return in_array("Super Administrador", $rolArray)||in_array("Administrador", $rolArray);
 
     }
 }

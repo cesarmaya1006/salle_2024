@@ -15,7 +15,7 @@ class Menu extends Model
     protected $guarded = [];
 
     //---------------------------------------------------------------
-    public function roles ()
+    public function roles_menu ()
     {
         return $this->belongsToMany(Role::class,'menu_rol','menu_id','rol_id');
     }
@@ -40,7 +40,7 @@ class Menu extends Model
         }
 
         if ($front) {
-            return $this->whereHas('roles', function ($query) use($ids) {
+            return $this->whereHas('roles_menu', function ($query) use($ids) {
                 $query->whereIn('rol_id', $ids)->orderby('menu_id');
             })->orderby('menu_id')
                 ->orderby('orden')

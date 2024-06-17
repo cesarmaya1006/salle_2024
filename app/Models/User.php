@@ -84,10 +84,15 @@ class User extends Authenticatable implements MustVerifyEmail
     //==================================================================================
     public function setSession()
     {
-        //$rol = $this->rol->first();
+        $roles = $this->getRoleNames();
+        $roles = substr($roles, 0, -1);
+        $roles = substr($roles, 1);
+        $roles = str_replace('"','', $roles);
+        //$roles = explode(',',$roles);
+        $roles = $this->roles;
         Session::put([
             'id_usuario' => $this->id,
-            'roles' => $this->getRoleNames(),
+            'roles' => $roles,
             /*
             'config_empresa_id' => $this->config_empresa_id,
             'config_tipo_documento_id' => $this->config_tipo_documento_id,

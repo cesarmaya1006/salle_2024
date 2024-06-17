@@ -23,7 +23,11 @@ class Empleado
 
     private function permiso()
     {
-        return in_array('Super Administrador',session('roles')) || in_array('Empleado',session('roles'));
+        $rolArray = [];
+        foreach (session('roles') as $rol) {
+            $rolArray[] = $rol['name'];
+        }
+        return in_array("Super Administrador", $rolArray)||in_array("Empleado", $rolArray);
 
     }
 }

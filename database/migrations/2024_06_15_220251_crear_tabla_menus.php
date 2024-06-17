@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('menu_id')->nullable();
-            //$table->foreign('config_menu_id','fk_configmenu_configmenu')->references('id')->on('config_menu')->onDelete('set null')->onUpdate('cascade');
             $table->string('nombre', 150);
             $table->string('url', 150);
             $table->unsignedBigInteger('orden')->default(1);

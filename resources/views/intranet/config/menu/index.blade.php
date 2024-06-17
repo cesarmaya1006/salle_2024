@@ -30,7 +30,7 @@
                 <div class="dd" id="nestable">
                     <ol class="dd-list" id="dd_list99" data-url="{{ route('menu.ordenar') }}">
                         @foreach ($menus as $key => $item)
-                            @if ($item['config_menu_id'] != 0)
+                            @if ($item['menu_id'] != 0)
                             @break
                         @endif
                         @include('intranet.config.menu.menu-item')

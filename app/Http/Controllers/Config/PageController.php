@@ -13,9 +13,15 @@ class PageController extends Controller
      */
     public function dashboard()
     {
-        //$usuario = User::with('roles')->findOrFail(session('id_usuario'));
+        $usuario = User::with('roles')->findOrFail(session('id_usuario'));
+        $roles = session('roles');
+        $roles = substr($roles, 0, -1);
+        $roles = substr($roles, 1);
+        $roles = str_replace('"','', $roles);
+        $roles = explode(',',$roles);
+
         //dd($usuario->toArray());
-        return view('dashboard');
+        return view('dashboard',compact('roles'));
     }
 
     public function profile()

@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Config\MenuController;
+use App\Http\Controllers\Config\MenuRolController;
 use App\Http\Controllers\Config\PageController;
+use App\Http\Controllers\Config\RolController;
 use App\Http\Controllers\Empresa\EmpGrupoController;
+use App\Http\Controllers\Empresa\EmpresaController;
+use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,7 +18,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     //Middleware Super admin
-    Route::prefix('configuracion_sis')->middleware('SuperAdmin')->group(function () {
+    Route::prefix('configuracion_sis')->middleware(SuperAdmin::class)->group(function () {
         // Ruta Administrador del Sistema Menus
         // ------------------------------------------------------------------------------------
         Route::controller(MenuController::class)->prefix('menu')->group(function () {
@@ -28,7 +32,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
         });
         // ------------------------------------------------------------------------------------
         // Ruta Administrador del Sistema Roles
-        Route::controller(ConfigRolController::class)->prefix('rol')->group(function () {
+        Route::controller(RolController::class)->prefix('rol')->group(function () {
             Route::get('', 'index')->name('rol.index');
             Route::get('crear', 'create')->name('rol.create');
             Route::get('editar/{id}', 'edit')->name('rol.edit');
@@ -38,7 +42,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
         });
         // ----------------------------------------------------------------------------------------
         /* Ruta Administrador del Sistema Menu Rol*/
-        Route::controller(ConfigMenuRolController::class)->prefix('permisos_menus_rol')->group(function () {
+        Route::controller(MenuRolController::class)->prefix('permisos_menus_rol')->group(function () {
             Route::get('', 'index')->name('menu.rol.index');
             Route::post('guardar', 'store')->name('menu.rol.store');
         });
@@ -59,8 +63,9 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
         // ------------------------------------------------------------------------------------
         // Ruta Administrador del SEmpresa
         // ------------------------------------------------------------------------------------
-        Route::controller(ConfigEmpresaController::class)->prefix('empresas')->group(function () {
+        Route::controller(EmpresaController::class)->prefix('empresas')->group(function () {
             Route::get('', 'index')->name('empresa.index');
+            Route::get('getEmpresas', 'getEmpresas')->name('empresa.getEmpresas');
             Route::get('crear', 'create')->name('empresa.create');
             Route::get('editar/{id}', 'edit')->name('empresa.edit');
             Route::post('guardar', 'store')->name('empresa.store');

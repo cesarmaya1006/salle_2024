@@ -36,6 +36,31 @@ Listado de Menus
 
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            @foreach (session('roles') as $rol)
+            <p>{{$rol['name']}}</p>
+            @endforeach
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">Middleware</div>
+        <div class="col-12">
+            @php
+                $rolArray = [];
+                foreach (session('roles') as $rol) {
+                    $rolArray[] = $rol['name'];
+                }
+            @endphp
+            @if (in_array("Super Administrador", $rolArray))
+                <p>Sipi</p>
+            @else
+                <p>Nop</p>
+            @endif
+        </div>
+    </div>
 @endsection
 @section('footer_card')
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Empresa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Empresa\EmpGrupo;
+use App\Models\Empresa\Empresa;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -12,7 +14,17 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $grupos = EmpGrupo::get();
+        return view('intranet.empresa.empresa.index', compact('grupos'));
+    }
+
+    public function getEmpresas(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(['data' => Empresa::where('emp_grupo_id', $_GET['id'])->get()]);
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -58,8 +70,21 @@ class EmpresaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            $empresa = Empresa::findOrFail($id);
+            if ($empresa->areas->count() > 0) {
+                return response()->json(['mensaje' => 'ng']);
+            } else {
+                if (Empresa::destroy($id)) {
+                    return response()->json(['mensaje' => 'ok']);
+                } else {
+                    return response()->json(['mensaje' => 'ng']);
+                }
+            }
+        } else {
+            abort(404);
+        }
     }
 }

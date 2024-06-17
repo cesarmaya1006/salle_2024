@@ -1,36 +1,50 @@
-@extends('intranet.layouts.app')
+@extends('intranet.layout.app')
+
 @section('css_pagina')
 @endsection
+
 @section('titulo_pagina')
-    Dashboard
+    <i class="fas fa-users mr-3" aria-hidden="true"></i> Configuración Roles
 @endsection
+
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active">Dashboard v1</li>
+    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('rol.index') }}">Roles</a></li>
+    <li class="breadcrumb-item active">Roles - Crear</li>
 @endsection
+
 @section('titulo_card')
-Titulo de la tarjeta
+    <i class="fa fa-plus-square mr-3" aria-hidden="true"></i> Crear Rol
 @endsection
+
 @section('botones_card')
-    <a href="#" class="btn btn-success btn-sm btn-xs btn-sombra pl-3 pr-3 float-md-end">
-        <i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>
-        Nuevo registro
-    </a>
-    <a href="#" class="btn btn-info btn-sm btn-xs btn-sombra pl-3 pr-3 float-md-end">
-        <i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>
-        Nuevo registro 2
+    <a href="{{route('rol.index')}}" class="btn btn-success btn-sm btn-sombra text-center pl-5 pr-5 float-md-end" style="font-size: 0.8em;">
+        <i class="fas fa-reply mr-2"></i>
+        Volver
     </a>
 @endsection
+
 @section('cuerpo')
-    <div class="row">
-        <div class="col-12">
-            <h4>Cuerpo de la pagina</h4>
+<div class="row d-flex justify-content-center">
+    <form class="col-12 col-md-6 form-horizontal" action="{{ route('rol.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+        @csrf
+        @method('post')
+        @include('intranet.config.roles.form')
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 mb-4 mb-md-0 d-grid gap-2 d-md-block ">
+                <button type="submit" class="btn btn-primary btn-sm btn-sombra pl-sm-5 pr-sm-5" style="font-size: 0.8em;">Guardar</button>
+            </div>
         </div>
-    </div>
+    </form>
+</div>
 @endsection
+
 @section('footer_card')
-
 @endsection
-@section('modales')
 
+@section('modales')
+@endsection
+
+@section('scripts_pagina')
+<script src="{{ asset('js/intranet/configuracion/roles/crear.js') }}"></script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,10 @@ class SuperAdmin
 
     private function permiso()
     {
-        return in_array('Super Administrador',session('roles')) || in_array('Administrador',session('roles'));
-
+        $rolArray = [];
+        foreach (session('roles') as $rol) {
+            $rolArray[] = $rol['name'];
+        }
+        return in_array("Super Administrador", $rolArray);
     }
 }

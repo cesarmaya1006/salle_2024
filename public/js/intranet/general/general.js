@@ -73,6 +73,7 @@ function mayus(e) {
     e.value = e.value.toUpperCase();
 }
 
+/*
 $(".tabla-borrando").on("submit", ".form-eliminar", function () {
     event.preventDefault();
     const form = $(this);
@@ -116,6 +117,7 @@ function ajaxRequest(form) {
         error: function () {},
     });
 }
+*/
 
 function menu_ul() {
     $("a.active").parent("ul.nav-treeview").css("display", "block");
@@ -123,10 +125,10 @@ function menu_ul() {
 
 $(document).ready(function () {
     $("a.active").parents("li").addClass("menu-open");
-    setInterval(notificacionesUsuairo, 5000);
-    setInterval(getmensajes_dest_rem_ult, 5000);
-    setInterval(get_all_nuevos_mensajes, 5000);
-    get_all_nuevos_mensajes();
+    //setInterval(notificacionesUsuairo, 5000);
+    //setInterval(getmensajes_dest_rem_ult, 5000);
+    //setInterval(get_all_nuevos_mensajes, 5000);
+    //get_all_nuevos_mensajes();
 
 
 
@@ -174,231 +176,6 @@ $(document).ready(function () {
         });
     }
 
-    $(".tabla_data_table_gantt").DataTable({
-        lengthMenu: [5,10, 15, 25, 50, 75, 100],
-        pageLength: 5,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                orientation: "landscape",
-                pageSize: "A1",
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
-    $(".tabla_data_table").DataTable({
-        lengthMenu: [10, 15, 25, 50, 75, 100],
-        pageLength: 15,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                orientation: "landscape",
-                pageSize: "A1",
-                defaultStyle: {
-                    fontSize: 10,
-                },
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
-
-    $(".tabla_data_table_xl").DataTable({
-        lengthMenu: [10, 15, 25, 50, 75, 100],
-        pageLength: 15,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                orientation: "landscape",
-                pageSize: "A1",
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
-
-    $(".tabla_data_table_l").DataTable({
-        lengthMenu: [10, 15, 25, 50, 75, 100],
-        pageLength: 15,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                orientation: "landscape",
-                pageSize: "Legal",
-                title: $("#titulo_tabla").val(),
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
-
-    $(".tabla_data_table_m").DataTable({
-        lengthMenu: [10, 15, 25, 50, 75, 100],
-        pageLength: 15,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                pageSize: "Legal",
-                title: $("#titulo_tabla").val(),
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
-
-    $(".tabla_data_table_s").DataTable({
-        lengthMenu: [10, 15, 25, 50, 75, 100],
-        pageLength: 15,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                orientation: "landscape",
-                pageSize: "letter",
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
-
-    $(".tabla_data_table_xs").DataTable({
-        lengthMenu: [10, 15, 25, 50, 75, 100],
-        pageLength: 15,
-        dom: "lBfrtip",
-        buttons: [
-            "excel",
-            {
-                extend: "pdfHtml5",
-                pageSize: "letter",
-            },
-        ],
-        language: {
-            sProcessing: "Procesando...",
-            sLengthMenu: "Mostrar _MENU_ resultados",
-            sZeroRecords: "No se encontraron resultados",
-            sEmptyTable: "Ningún dato disponible en esta tabla",
-            sInfo: "Mostrando resultados _START_-_END_ de  _TOTAL_",
-            sInfoEmpty:
-                "Mostrando resultados del 0 al 0 de un total de 0 registros",
-            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
-            sSearch: "Buscar:",
-            sLoadingRecords: "Cargando...",
-            oPaginate: {
-                sFirst: "Primero",
-                sLast: "Último",
-                sNext: "Siguiente",
-                sPrevious: "Anterior",
-            },
-        },
-    });
 
     //--------------------------------------------------------------------------------------------
     $("#id_body_dark_mode").change(function () {
@@ -544,6 +321,7 @@ $(document).ready(function () {
             error: function () {},
         });
     });
+    /*
     notificacionesUsuairo();
     sidebar_collapse();
     sidebar_mini_md_checkbox_input();
@@ -558,7 +336,7 @@ $(document).ready(function () {
         window.location = $(this).attr("href");
         return false;
     });
-
+*/
     //-------------------------------------------
     $(".search").keyup(function () {
         var searchTerm = $(".search").val();
@@ -628,6 +406,7 @@ function flat_sidebar_checkbox_input() {
         $(".nav-sidebar").removeClass("nav-flat");
     }
 }
+/*
 function color_fondo_hijos(color) {
     var hijos = $(".main-sidebar").find("a");
     switch (color) {
@@ -931,6 +710,7 @@ function notificacionesUsuairo() {
         error: function () {},
     });
 }
+
 const notificacionesMenuSupModal = new bootstrap.Modal(
     document.getElementById("notificacionesMenuSupModal")
 );
@@ -1356,3 +1136,4 @@ function get_all_nuevos_mensajes(){
         error: function () {},
     });
 }
+*/
