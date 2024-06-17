@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Empresa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Config\TipoDocumento;
 use App\Models\Empresa\EmpGrupo;
 use App\Models\Empresa\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Intervention\Image\Laravel\Facades\Image;
 
 class EmpresaController extends Controller
 {
@@ -32,7 +35,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        $tiposdocu = TipoDocumento::get();
+        $grupos = EmpGrupo::get();
+        return view('intranet.empresa.empresa.crear',compact('tiposdocu','grupos'));
     }
 
     /**
@@ -40,7 +45,31 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // - - - - - - - - - - - - - - - - - - - - - - - -
+        if ($request->hasFile('logo')) {
+            $ruta = Config::get('constantes.folder_img_empresas');
+            $ruta = trim($ruta);
+
+            $logo = $request->logo;
+            $imagen_logo = Image::read($logo);
+            $nombrelogo = time() . $logo->getClientOriginalName();
+            $imagen_logo->resize(500, 500);
+            $imagen_logo->save($ruta . $nombrelogo, 100);
+            $empresa_new['logo'] = $nombrelogo;
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - -
+        $empresa_new['emp_grupo_id'] = $request['emp_grupo_id'];
+        $empresa_new['tipo_documento_id'] = $request['tipo_documento_id'];
+        $empresa_new['identificacion'] = $request['identificacion'];
+        $empresa_new['empresa'] = ucwords(strtolower($request['empresa']));
+        $empresa_new['email'] = strtolower($request['email']);
+        $empresa_new['telefono'] = $request['telefono'];
+        $empresa_new['direccion'] = $request['direccion'];
+        $empresa_new['contacto'] = ucwords(strtolower($request['contacto']));
+        $empresa_new['cargo'] = ucwords(strtolower($request['cargo']));
+        $empresa = Empresa::create($empresa_new);
+        return redirect('dashboard/configuracion_sis/empresas')->with('mensaje', 'Empresa creada con éxito');
+
     }
 
     /**
@@ -56,7 +85,10 @@ class EmpresaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $tiposdocu = TipoDocumento::get();
+        $grupos = EmpGrupo::get();
+        $empresa_edit = Empresa::findOrFail($id);
+        return view('intranet.empresa.empresa.editar',compact('tiposdocu','grupos','empresa_edit'));
     }
 
     /**
@@ -64,7 +96,31 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $empresa_old = Empresa::findOrFail($id);
+        // - - - - - - - - - - - - - - - - - - - - - - - -
+        if ($request->hasFile('logo')) {
+            $ruta = Config::get('constantes.folder_img_empresas');
+            $ruta = trim($ruta);
+            unlink($ruta . $empresa_old->logo);
+            $logo = $request->logo;
+            $imagen_logo = Image::read($logo);
+            $nombrelogo = time() . $logo->getClientOriginalName();
+            $imagen_logo->resize(500, 500);
+            $imagen_logo->save($ruta . $nombrelogo, 100);
+            $empresa_update['logo'] = $nombrelogo;
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - -
+        $empresa_update['emp_grupo_id'] = $request['emp_grupo_id'];
+        $empresa_update['tipo_documento_id'] = $request['tipo_documento_id'];
+        $empresa_update['identificacion'] = $request['identificacion'];
+        $empresa_update['empresa'] = ucwords(strtolower($request['empresa']));
+        $empresa_update['email'] = strtolower($request['email']);
+        $empresa_update['telefono'] = $request['telefono'];
+        $empresa_update['direccion'] = $request['direccion'];
+        $empresa_update['contacto'] = ucwords(strtolower($request['contacto']));
+        $empresa_update['cargo'] = ucwords(strtolower($request['cargo']));
+        $empresa_old->update($empresa_update);
+        return redirect('dashboard/configuracion_sis/empresas')->with('mensaje', 'Empresa actualizada con éxito');
     }
 
     /**
@@ -78,6 +134,9 @@ class EmpresaController extends Controller
                 return response()->json(['mensaje' => 'ng']);
             } else {
                 if (Empresa::destroy($id)) {
+                    $ruta = Config::get('constantes.folder_img_empresas');
+                    $ruta = trim($ruta);
+                    unlink($ruta . $empresa->logo);
                     return response()->json(['mensaje' => 'ok']);
                 } else {
                     return response()->json(['mensaje' => 'ng']);

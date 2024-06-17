@@ -35,7 +35,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-md-6 mb-4 mb-md-0 d-grid gap-2 d-md-block ">
                     <button type="submit" class="btn btn-primary btn-sm btn-sombra pl-sm-5 pr-sm-5"
-                        style="font-size: 0.8em;">Guardar</button>
+                        style="font-size: 0.8em;">Actualizar</button>
                 </div>
             </div>
         </form>

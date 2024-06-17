@@ -26,6 +26,22 @@ class TablaRolesSeeder extends Seeder
 
         Permission::create(['name'=>'dashboard'])->syncRoles([$rol1,$rol2,$rol3,$rol4]);
 
+        Permission::create(['name'=>'menu.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'rol.index'])->syncRoles([$rol1]);
+
+        Permission::create(['name'=>'menu.rol.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'menu.rol.store'])->syncRoles([$rol1]);
+
+        Permission::create(['name'=>'grupo_empresas.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'grupo_empresas.create'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'grupo_empresas.edit'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'grupo_empresas.destroy'])->syncRoles([$rol1]);
+
+        Permission::create(['name'=>'empresa.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'empresa.create'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'empresa.edit'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'empresa.destroy'])->syncRoles([$rol1]);
+
 
     }
 }
