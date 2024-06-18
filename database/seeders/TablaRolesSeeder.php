@@ -32,6 +32,16 @@ class TablaRolesSeeder extends Seeder
         Permission::create(['name'=>'menu.rol.index'])->syncRoles([$rol1]);
         Permission::create(['name'=>'menu.rol.store'])->syncRoles([$rol1]);
 
+        Permission::create(['name'=>'permisos_menus_empresas.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'permisos_menus_empresas.store'])->syncRoles([$rol1]);
+
+        Permission::create(['name'=>'permiso_rutas.index'])->syncRoles([$rol1]);
+
+        Permission::create(['name'=>'permisos_rol.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'permisos_rol.store'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'permisos_rol.excepciones'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'permisos_rol.store_excepciones'])->syncRoles([$rol1]);
+
         Permission::create(['name'=>'grupo_empresas.index'])->syncRoles([$rol1]);
         Permission::create(['name'=>'grupo_empresas.create'])->syncRoles([$rol1]);
         Permission::create(['name'=>'grupo_empresas.edit'])->syncRoles([$rol1]);
@@ -41,7 +51,13 @@ class TablaRolesSeeder extends Seeder
         Permission::create(['name'=>'empresa.create'])->syncRoles([$rol1]);
         Permission::create(['name'=>'empresa.edit'])->syncRoles([$rol1]);
         Permission::create(['name'=>'empresa.destroy'])->syncRoles([$rol1]);
+        //permisos Sin rutas
+        Permission::create(['name'=>'layout.header.control-sidebar'])->syncRoles([$rol1]);
 
+        Permission::create(['name'=>'areas.index'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'areas.create'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'areas.edit'])->syncRoles([$rol1]);
+        Permission::create(['name'=>'areas.destroy'])->syncRoles([$rol1]);
 
     }
 }

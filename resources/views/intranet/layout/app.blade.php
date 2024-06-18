@@ -1,3 +1,4 @@
+@yield('php_funciones')
 <!DOCTYPE html>
 <html lang="es">
 

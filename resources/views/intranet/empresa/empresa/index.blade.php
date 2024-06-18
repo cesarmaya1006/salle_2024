@@ -171,17 +171,11 @@
                                     respuesta_html +=
                                         '<i class="fas fa-pen-square"></i>';
                                     respuesta_html += '</a>';
-                                    respuesta_html += '<form action="' +
-                                        grupo_empresas_destroy_fin + item.id +
-                                        '" class="d-inline form-eliminar" method="POST">';
-                                    respuesta_html +=
-                                        '<input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">';
-                                    respuesta_html +=
-                                        '<input type="hidden" name="_method" value="delete">';
-                                    respuesta_html +=
-                                        '<button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">';
-                                    respuesta_html +=
-                                        '<i class="fa fa-fw fa-trash text-danger"></i>';
+                                    respuesta_html += '<form action="' + grupo_empresas_destroy_fin + item.id + '" class="d-inline form-eliminar" method="POST">';
+                                    respuesta_html += '<input type="hidden" name="_token" value="{{ csrf_token() }}" autocomplete="off">';
+                                    respuesta_html += '<input type="hidden" name="_method" value="delete">';
+                                    respuesta_html += '<button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">';
+                                    respuesta_html += '<i class="fa fa-fw fa-trash text-danger"></i>';
                                     respuesta_html += '</button>';
                                     respuesta_html += '</form>';
                                     respuesta_html += '</td>';

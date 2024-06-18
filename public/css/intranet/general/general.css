@@ -8,6 +8,9 @@
 .btn-sombra{
     box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
 }
+.btn-mini_sombra{
+    box-shadow: 3px 3px 1px 0px rgba(0,0,0,0.75);
+}
 
 .sombra_general {
     -webkit-box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.85);

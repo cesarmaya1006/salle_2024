@@ -105,7 +105,7 @@ class EmpGrupoController extends Controller
 
     public function getEmpresas(Request $request){
         if ($request->ajax()) {
-            return response()->json(['empresas' => Empresa::where('config_grupo_empresas_id',$_GET['id'])->get()]);
+            return response()->json(['empresas' => Empresa::where('emp_grupo_id',$_GET['id'])->get()]);
         } else {
             abort(404);
         }

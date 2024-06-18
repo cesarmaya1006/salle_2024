@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             TablaAreas::class,
             TablaCargos::class,
             TablaRolesSeeder::class,
-            TablaUsuariosSeeder::class,
             TablaMenusSeeder::class,
+            TablaUsuariosSeeder::class,
 
         ]);
     }

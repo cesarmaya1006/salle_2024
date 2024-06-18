@@ -2,6 +2,7 @@
 
 namespace App\Models\Config;
 
+use App\Models\Empresa\Empresa;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,12 @@ class Menu extends Model
     public function roles_menu ()
     {
         return $this->belongsToMany(Role::class,'menu_rol','menu_id','rol_id');
+    }
+    //---------------------------------------------------------------
+    //---------------------------------------------------------------
+    public function empresas_menu ()
+    {
+        return $this->belongsToMany(Empresa::class,'menu_empresas','menu_id','empresa_id');
     }
     //---------------------------------------------------------------
     public function getHijos($padres, $line)
@@ -40,12 +47,25 @@ class Menu extends Model
         }
 
         if ($front) {
-            return $this->whereHas('roles_menu', function ($query) use($ids) {
-                $query->whereIn('rol_id', $ids)->orderby('menu_id');
-            })->orderby('menu_id')
-                ->orderby('orden')
-                ->get()
-                ->toArray();
+            if (in_array(1, $ids,true)) {
+                return $this->whereHas('roles_menu', function ($query) use($ids) {
+                    $query->whereIn('rol_id', $ids)->orderby('menu_id');
+                })->orderby('menu_id')
+                    ->orderby('orden')
+                    ->get()
+                    ->toArray();
+            } else {
+                $id_empresa = $usuario->empleado->cargo->area->empresa_id;
+                return $this->whereHas('roles_menu', function ($query) use($ids) {
+                    $query->whereIn('rol_id', $ids)->orderby('menu_id');
+                })->whereHas('empresas_menu', function ($query2) use($id_empresa) {
+                    $query2->where('empresa_id', $id_empresa)->orderby('menu_id');
+                })->orderby('menu_id')
+                  ->orderby('orden')
+                  ->get()
+                  ->toArray();
+
+            }
         } else {
             return $this->orderby('menu_id')
                 ->orderby('orden')

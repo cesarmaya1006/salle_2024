@@ -5,22 +5,22 @@
 @endsection
 
 @section('titulo_pagina')
-    <i class="fas fa-users mr-3" aria-hidden="true"></i> Configuración Roles
+    <i class="fas fa-check-square mr-3" aria-hidden="true"></i> Configuración Permisos
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Inicio</a></li>
-    <li class="breadcrumb-item active">Roles</li>
+    <li class="breadcrumb-item active">Permisos</li>
 @endsection
 
 @section('titulo_card')
-    Listado de Roles
+    Listado de Permisos
 @endsection
 
 @section('botones_card')
     <a href="{{ route('rol.create') }}" class="btn btn-info btn-sm btn-sombra text-center pl-5 pr-5 float-md-end">
         <i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>
-        Nuevo registro
+        Nuevo Permiso
     </a>
 @endsection
 
@@ -30,33 +30,21 @@
             <table class="table table-striped table-hover table-sm tabla_data_table_xs tabla-borrando" id="tabla-data">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th class="width70"></th>
+                        <th>Id</th>
+                        <th>Permiso / Ruta</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($roles as $rol)
+                    @foreach ($permisos as $permiso)
                         <tr>
-                            <td>{{ $rol->name }}</td>
-                            <td class="d-flex justify-content-evenly">
-                                <a href="{{ route('rol.edit', ['id' => $rol->id]) }}" class="btn-accion-tabla tooltipsC"
-                                    title="Editar este registro">
-                                    <i class="fas fa-pen-square"></i>
-                                </a>
-                                <form action="{{ route('rol.destroy', ['id' => $rol->id]) }}" class="d-inline form-eliminar"
-                                    method="POST">
-                                    @csrf @method('delete')
-                                    <button type="submit" class="btn-accion-tabla eliminar tooltipsC"
-                                        title="Eliminar este registro">
-                                        <i class="fa fa-fw fa-trash text-danger"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            <td>{{ $permiso->id }}</td>
+                            <td>{{ $permiso->name }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
 @endsection
 

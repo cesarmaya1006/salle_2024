@@ -44,15 +44,25 @@ class TablaAreas extends Seeder
 
         $grupos = EmpGrupo::get();
 
+        $x= 1;
+        $y = 1;
+
         foreach ($grupos as $grupo) {
             foreach ($grupo->empresas as $empresa) {
                 foreach ($datas as $data) {
+                    if ($data['area_id'] ==null) {
+                        $y = $x;
+                    } else{
+                        $data['area_id'] = $y;
+                    }
+
                     DB::table('areas')->insert([
                         'area_id' => $data['area_id'],
                         'empresa_id' => $empresa->id,
                         'area' => $data['area'],
                         'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]);
+                    $x++;
                 }
             }
         }
