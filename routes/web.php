@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\Config\MenuController;
-use App\Http\Controllers\Config\MenuEmpresaController;
 use App\Http\Controllers\Config\MenuRolController;
 use App\Http\Controllers\Config\PageController;
 use App\Http\Controllers\Config\PermisoController;
 use App\Http\Controllers\Config\PermisoRolController;
 use App\Http\Controllers\Config\RolController;
-use App\Http\Controllers\Empresa\AreaController;
-use App\Http\Controllers\Empresa\EmpGrupoController;
-use App\Http\Controllers\Empresa\EmpresaController;
-use App\Http\Middleware\AdminEmp;
+use App\Http\Controllers\Propuestas\ComponenteController;
+use App\Http\Controllers\Propuestas\EmprendedorController;
+use App\Http\Controllers\Propuestas\JuradoController;
+use App\Http\Controllers\Propuestas\SubComponenteController;
+use App\Http\Controllers\Usuarios\UsuarioController;
+use App\Http\Middleware\AdminSis;
+use App\Http\Middleware\Emprendedor;
+use App\Http\Middleware\Jurado;
 use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -51,12 +54,6 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
             Route::get('', 'index')->name('menu.rol.index');
             Route::post('guardar', 'store')->name('menu.rol.store');
         });
-        // ----------------------------------------------------------------------------------------
-        /* Ruta Administrador del Sistema Menu Empresas*/
-        Route::controller(MenuEmpresaController::class)->prefix('permisos_menus_empresas')->group(function () {
-            Route::get('', 'index')->name('permisos_menus_empresas.index');
-            Route::post('guardar', 'store')->name('permisos_menus_empresas.store');
-        });
         // ------------------------------------------------------------------------------------
         // Ruta Administrador del Sistema Roles
         Route::controller(PermisoController::class)->prefix('permiso_rutas')->group(function () {
@@ -71,48 +68,76 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
             Route::post('guardar_excepciones', 'store_excepciones')->name('permisos_rol.store_excepciones');
         });
         // ----------------------------------------------------------------------------------------
-        // Ruta Administrador Grupo Empresas
-        // ------------------------------------------------------------------------------------
-        Route::controller(EmpGrupoController::class)->prefix('grupo_empresas')->group(function () {
-            Route::get('', 'index')->name('grupo_empresas.index');
-            Route::get('crear', 'create')->name('grupo_empresas.create');
-            Route::get('editar/{id}', 'edit')->name('grupo_empresas.edit');
-            Route::post('guardar', 'store')->name('grupo_empresas.store');
-            Route::put('actualizar/{id}', 'update')->name('grupo_empresas.update');
-            Route::delete('eliminar/{id}', 'destroy')->name('grupo_empresas.destroy');
-            Route::get('activar/{id}', 'activar')->name('grupo_empresas.activar');
-            Route::get('getEmpresas', 'getEmpresas')->name('grupo_empresas.getEmpresas');
+        // Ruta Administrador del Sistema Roles
+        Route::controller(UsuarioController::class)->prefix('usuarios')->group(function () {
+            Route::get('', 'index')->name('usuarios.index');
+            Route::get('crear', 'create')->name('usuarios.create');
+            Route::get('editar/{id}', 'edit')->name('usuarios.edit');
+            Route::post('guardar', 'store')->name('usuarios.store');
+            Route::put('actualizar/{id}', 'update')->name('usuarios.update');
+            Route::delete('eliminar/{id}', 'destroy')->name('usuarios.destroy');
         });
-        // ------------------------------------------------------------------------------------
-        // ------------------------------------------------------------------------------------
-        // Ruta Administrador del SEmpresa
-        // ------------------------------------------------------------------------------------
-        Route::controller(EmpresaController::class)->prefix('empresas')->group(function () {
-            Route::get('', 'index')->name('empresa.index');
-            Route::get('getEmpresas', 'getEmpresas')->name('empresa.getEmpresas');
-            Route::get('crear', 'create')->name('empresa.create');
-            Route::get('editar/{id}', 'edit')->name('empresa.edit');
-            Route::post('guardar', 'store')->name('empresa.store');
-            Route::put('actualizar/{id}', 'update')->name('empresa.update');
-            Route::delete('eliminar/{id}', 'destroy')->name('empresa.destroy');
-            Route::get('activar/{id}', 'activar')->name('empresa.activar');
+        // ----------------------------------------------------------------------------------------
+
+    });
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Route::middleware(AdminSis::class)->group(function () {
+        Route::prefix('parametros')->group(function () {
+            // ----------------------------------------------------------------------------------------
+            // Ruta Administrador del Sistema Roles
+            Route::controller(ComponenteController::class)->prefix('componentes')->group(function () {
+                Route::get('', 'index')->name('componentes.index');
+                Route::get('crear', 'create')->name('componentes.create');
+                Route::get('editar/{id}', 'edit')->name('componentes.edit');
+                Route::post('guardar', 'store')->name('componentes.store');
+                Route::put('actualizar/{id}', 'update')->name('componentes.update');
+                Route::delete('eliminar/{id}', 'destroy')->name('componentes.destroy');
+            });
+            // ----------------------------------------------------------------------------------------
+            // Ruta Administrador del Sistema Roles
+            Route::controller(SubComponenteController::class)->prefix('subcomponentes')->group(function () {
+                Route::get('', 'index')->name('subcomponentes.index');
+                Route::get('crear', 'create')->name('subcomponentes.create');
+                Route::get('editar/{id}', 'edit')->name('subcomponentes.edit');
+                Route::post('guardar', 'store')->name('subcomponentes.store');
+                Route::put('actualizar/{id}', 'update')->name('subcomponentes.update');
+                Route::delete('eliminar/{id}', 'destroy')->name('subcomponentes.destroy');
+            });
+        });
+        // ----------------------------------------------------------------------------------------
+        // Ruta Administrador del Sistema Roles
+        Route::controller(JuradoController::class)->prefix('jurados')->group(function () {
+            Route::get('', 'index')->name('jurados.index');
+            Route::get('crear', 'create')->name('jurados.create');
+            Route::get('editar/{id}', 'edit')->name('jurados.edit');
+            Route::post('guardar', 'store')->name('jurados.store');
+            Route::put('actualizar/{id}', 'update')->name('jurados.update');
+            Route::delete('eliminar/{id}', 'destroy')->name('jurados.destroy');
+            Route::get('asignacion', 'asignacion')->name('jurados.asignacion');
+            Route::get('asignacion_dos', 'asignacion_dos')->name('jurados.asignacion_dos');
+        });
+        // ----------------------------------------------------------------------------------------
+        // Ruta Administrador del Sistema Roles
+        Route::controller(EmprendedorController::class)->prefix('emprendedores')->group(function () {
+            Route::get('', 'index')->name('emprendedores.index');
         });
         // ----------------------------------------------------------------------------------------
     });
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Route::prefix('configuracion')->middleware(AdminEmp::class)->group(function () {
-        // ------------------------------------------------------------------------------------
+    Route::prefix('configuracion')->middleware(Jurado::class)->group(function () {
+        // ----------------------------------------------------------------------------------------
         // Ruta Administrador del Sistema Roles
-        Route::controller(AreaController::class)->prefix('areas')->group(function () {
-            Route::get('', 'index')->name('areas.index');
-            Route::get('crear', 'create')->name('areas.create');
-            Route::get('editar/{id}', 'edit')->name('areas.edit');
-            Route::post('guardar', 'store')->name('areas.store');
-            Route::put('actualizar/{id}', 'update')->name('areas.update');
-            Route::delete('eliminar/{id}', 'destroy')->name('areas.destroy');
-            Route::get('getDependencias/{id}', 'getDependencias')->name('areas.getDependencias');
-            Route::get('getAreas', 'getAreas')->name('areas.getAreas');
+        Route::controller(JuradoController::class)->group(function () {
+            Route::get('calificar-primera-fase/{id}', 'calificar_primera_fase')->name('jurados.calificar_primera_fase');
+            Route::post('calificar-primera-fase/{id}/guardar', 'calificar_primera_fase_guardar')->name('jurados.calificar_primera_fase_guardar');
+
+            Route::get('calificar-segunda-fase/{id}', 'calificar_segunda_fase')->name('jurados.calificar_segunda_fase');
+            Route::post('calificar-segunda-fase/{id}/guardar', 'calificar_segunda_fase_guardar')->name('jurados.calificar_segunda_fase_guardar');
         });
         // ----------------------------------------------------------------------------------------
     });
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    Route::prefix('configuracion')->middleware(Emprendedor::class)->group(function () {
+    });
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 });

@@ -4,14 +4,16 @@
     <link rel="stylesheet" href="{{ asset('css/extranet/login/login_2.css') }}">
 @endsection
 @section('cuerpo_pagina')
-    <div class="row mt-5">
-        <div class="col-11 col-md-6">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-6 mt-3">
             @include('includes.error-form')
             @include('includes.mensaje')
         </div>
+    </div>
+    <div class="row mt-5">
         <div class="col-12 d-flex align-items-center justify-content-center">
             <div class="box">
-                <img src="{{ asset('imagenes/sistema/logo.png') }}" alt="M $ M" width="300" />
+                <img src="{{ asset('imagenes/sistema/logo_salle_full.png') }}" alt="M $ M" width="300" />
                 <h3 class="mt-3 mb-4">Bienvenidos</h3>
                 <h3 style="font-size: 1.2em;">Sistema Base de Proyectos</h3>
                 <br>
@@ -19,7 +21,7 @@
                     @method('post')
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control form-control-sm email" id="email" name="email" placeholder="email">
+                        <input type="text" class="form-control form-control-sm username" id="username" name="username" placeholder="Usuario">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control form-control-sm password" id="password" name="password"placeholder="Password">

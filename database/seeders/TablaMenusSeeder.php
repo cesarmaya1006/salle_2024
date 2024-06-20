@@ -23,9 +23,6 @@ class TablaMenusSeeder extends Seeder
         DB::table('menu_rol')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
-        DB::table('menu_empresas')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
         // ========== ========== ========== ========== ========== ========== ========== ========== ========== ========== ========== ==========
         $menus = [
@@ -33,7 +30,7 @@ class TablaMenusSeeder extends Seeder
             ['nombre' => 'Dashboard', 'menu_id' => null, 'url' => 'dashboard', 'orden' => '1', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
             //Menu configuración 2
             [
-                'nombre' => 'Configuración Sistema', 'menu_id' => null, 'url' => '#', 'orden' => '2', 'icono' => 'fas fa-cogs',
+                'nombre' => 'Configuración Sistema', 'menu_id' => null, 'url' => '#', 'orden' => '2', 'icono' => 'fas fa-tools',
                 'Array_1' => [
                     //Menu menu
                     ['nombre' => 'Menús', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/menu', 'orden' => '1',  'icono' => 'fas fa-list-ul', 'Array_1' => []],
@@ -41,103 +38,46 @@ class TablaMenusSeeder extends Seeder
                     ['nombre' => 'Roles', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/rol', 'orden' => '2',  'icono' => 'fas fa-users', 'Array_1' => []],
                     //Menu Menu_Roles
                     ['nombre' => 'Menú - Roles', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/permisos_menus_rol', 'orden' => '2',  'icono' => 'fas fa-chalkboard-teacher', 'Array_1' => []],
-                    //Menu Menu_Empresas
-                    ['nombre' => 'Menú - Empresas', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/permisos_menus_empresas', 'orden' => '2',  'icono' => 'fas fa-grip-horizontal', 'Array_1' => []],
                     //Menu permisos
                     ['nombre' => 'Permisos', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/permiso_rutas', 'orden' => '2',  'icono' => 'fas fa-check-square', 'Array_1' => []],
                     //Menu permisos-rol
                     ['nombre' => 'Permisos - Roles', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/permisos_rol', 'orden' => '2',  'icono' => 'fas fa-user-shield', 'Array_1' => []],
-                    //Menu Grupo Empresas
-                    ['nombre' => 'Grupo Empresas', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/grupo_empresas', 'orden' => '2',  'icono' => 'fas fa-industry', 'Array_1' => []],
-                    //Menu Empresas
-                    ['nombre' => 'Empresas', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/empresas', 'orden' => '2',  'icono' => 'fas fa-building', 'Array_1' => []],
-
+                    //Menu permisos-rol
+                    ['nombre' => 'Usuarios', 'menu_id' => '2',  'url' => 'dashboard/configuracion_sis/usuarios', 'orden' => '2',  'icono' => 'fas fa-user-friends', 'Array_1' => []],
                 ],
             ],
+            //Menu parametros
             [
-                'nombre' => 'Configuración', 'menu_id' => null, 'url' => '#', 'orden' => '3', 'icono' => 'fas fa-cogs',
+                'nombre' => 'Parametros', 'menu_id' => null, 'url' => '#', 'orden' => '2', 'icono' => 'fas fa-cogs',
                 'Array_1' => [
-                    //Menu organigrama
-                    [
-                        'nombre' => 'Organigrama', 'menu_id' => '2',  'url' => '#', 'orden' => '1',  'icono' => 'fas fa-sitemap',
-                        'Array_1' => [
-                            //Menu Areas
-                            ['nombre' => 'Áreas', 'menu_id' => '2',  'url' => 'dashboard/configuracion/areas', 'orden' => '1',  'icono' => 'fas fa-project-diagram', 'Array_1' => []],
-                            //Menu Roles
-                            ['nombre' => 'Cargos', 'menu_id' => '2',  'url' => 'dashboard/configuracion/cargos', 'orden' => '2',  'icono' => 'fas fa-user-tie', 'Array_1' => []],
-                            //Menu Roles
-                            ['nombre' => 'Empleados', 'menu_id' => '2',  'url' => 'dashboard/configuracion/empleados', 'orden' => '2',  'icono' => 'fas fa-users', 'Array_1' => []],
-
-                        ]
-                    ],
-
+                    //Categorias Componente
+                    ['nombre' => 'Categorias Componente', 'menu_id' => '2',  'url' => 'dashboard/parametros/componentes', 'orden' => '1',  'icono' => 'fas fa-sitemap', 'Array_1' => []],
+                    //Menu Roles
+                    ['nombre' => 'Componentes', 'menu_id' => '2',  'url' => 'dashboard/parametros/subcomponentes', 'orden' => '2',  'icono' => 'fas fa-sort-alpha-down', 'Array_1' => []],
                 ],
             ],
-            //Menu Modulo Juridico
+            //Menu Propuestas
+            ['nombre' => 'Propuestas', 'menu_id' => null, 'url' => 'dashboard/propuestas', 'orden' => '1', 'icono' => 'fas fa-folder-open', 'Array_1' => []],
+            //Menu Propuestas Fase Dos
+            ['nombre' => 'Propuestas Fase Dos', 'menu_id' => null, 'url' => 'dashboard/fase_dos_propuestas', 'orden' => '1', 'icono' => 'fas fa-folder-open', 'Array_1' => []],
+            //Menu Jurados
+            ['nombre' => 'Jurados', 'menu_id' => null, 'url' => 'dashboard/jurados', 'orden' => '1', 'icono' => 'fas fa-graduation-cap', 'Array_1' => []],
+            //Menu Emprendedores
+            ['nombre' => 'Emprendedores', 'menu_id' => null, 'url' => 'dashboard/emprendedores', 'orden' => '1', 'icono' => 'fas fa-user-graduate', 'Array_1' => []],
+            //Menu otras opciones
             [
-                'nombre' => 'Módulo Jurídico', 'menu_id' => null, 'url' => '#', 'orden' => '3', 'icono' => 'fas fa-balance-scale',
+                'nombre' => 'Otras opciones', 'menu_id' => null, 'url' => '#', 'orden' => '2', 'icono' => 'fas fa-question-circle',
                 'Array_1' => [
-                    //Menu Parametrizacion Juridico
-                    [
-                        'nombre' => 'Parametrización', 'url' => '#', 'icono' => 'fas fa-indent',
-                        'Array_1' => [
-                            //Param  Juzgados
-                            [
-                                'nombre' => 'Parámetros Juzgados', 'url' => '#', 'icono' => 'fas fa-balance-scale',
-                                'Array_1' => [
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Jurisdiccion Juzgados', 'url' => 'dashboard/modulo-juridico/param-juzgados/jurisdiccion-juzgados', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Departamentos Juzgados', 'url' => 'dashboard/modulo-juridico/param-juzgados/departamentos-juzgados', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Distritos Juzgados', 'url' => 'dashboard/modulo-juridico/param-juzgados/distritos-juzgados', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Circuitos Juzgados', 'url' => 'dashboard/modulo-juridico/param-juzgados/circuitos-juzgados', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Municipios Juzgados', 'url' => 'dashboard/modulo-juridico/param-juzgados/circuitos-juzgados', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Juzgados', 'url' => 'dashboard/modulo-juridico/param-juzgados/juzgados', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                ],
-                            ],
-                            //Param  Procesos
-                            [
-                                'nombre' => 'Parámetros Procesos', 'url' => '#', 'icono' => 'fas fa-copy',
-                                'Array_1' => [
-                                    //Param  jurisdiccion juzgados
-                                    ['nombre' => 'Tipos de Procesos', 'url' => 'dashboard/modulo-juridico/param-procesos/tipos-procesos', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  Papel Cliente
-                                    ['nombre' => 'Papel Cliente', 'url' => 'dashboard/modulo-juridico/param-procesos/papel-cliente', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  Estado Procesos
-                                    ['nombre' => 'Estado Procesos', 'url' => 'dashboard/modulo-juridico/param-procesos/estado-procesos', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  Etapa Procesos
-                                    ['nombre' => 'Etapa Procesos', 'url' => 'dashboard/modulo-juridico/param-procesos/etapa-procesos', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  Riesgo Perdida Procesos
-                                    ['nombre' => 'Riesgo Perdida Procesos', 'url' => 'dashboard/modulo-juridico/param-procesos/riesgo-procesos', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  Sentidos de Fallo Procesos
-                                    ['nombre' => 'Sentidos de Fallo Procesos', 'url' => 'dashboard/modulo-juridico/param-procesos/sentido-fallo-procesos', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                    //Param  Terminación Anormal Procesos
-                                    ['nombre' => 'Terminación Anormal Procesos', 'url' => 'dashboard/modulo-juridico/param-procesos/terminacion-anormal-procesos', 'icono' => 'mdi mdi-view-dashboard', 'Array_1' => []],
-                                ],
-                            ],
-                        ],
-                    ],
-                    // Procesos
-                    [
-                        'nombre' => 'Procesos', 'url' => 'dashboard/modulo-juridico/procesos', 'icono' => 'fas fa-gavel', 'Array_1' => []
-                    ]
-
+                    //Categorias Componente
+                    ['nombre' => 'Consulte nuestas políticas de datos', 'menu_id' => '2',  'url' => 'dashboard/opciones/consulta-politicas', 'orden' => '1',  'icono' => 'fas fa-question-circle', 'Array_1' => []],
+                    //Menu Roles
+                    ['nombre' => 'Ayuda', 'menu_id' => '2',  'url' => 'dashboard/opciones/ayuda', 'orden' => '2',  'icono' => 'fas fa-question-circle', 'Array_1' => []],
+                    //Categorias Componente
+                    ['nombre' => 'Actualizar datos', 'menu_id' => '2',  'url' => 'dashboard/opciones/actualizar-datos', 'orden' => '1',  'icono' => 'fas fa-edit', 'Array_1' => []],
+                    //Menu Roles
+                    ['nombre' => 'Cambiar contraseña', 'menu_id' => '2',  'url' => 'dashboard/opciones/cambiar-password', 'orden' => '2',  'icono' => 'fas fa-key', 'Array_1' => []],
                 ],
             ],
-            // Modulo archivo
-            ['nombre' => 'Módulo Archivo', 'menu_id' => null, 'url' => 'dashboard/modulo-archivo', 'icono' => 'far fa-folder-open', 'Array_1' => []],
-            // Modulo proyectos
-            ['nombre' => 'Módulo proyectos', 'menu_id' => null, 'url' => 'dashboard/proyectos', 'icono' => 'fas fa-project-diagram', 'Array_1' => []],
-            // Modulo archivo
-            ['nombre' => 'Noticias', 'menu_id' => null, 'url' => 'dashboard/noticias', 'icono' => 'fas fa-newspaper', 'Array_1' => []],
-            // Modulo archivo
-            ['nombre' => 'Diagnósticos Legales', 'menu_id' => null, 'url' => 'dashboard/diagnosticos', 'icono' => 'fas fa-chart-line', 'Array_1' => []],
-            // Modulo archivo
-            ['nombre' => 'Consultas / Solicitudes', 'menu_id' => null, 'url' => 'dashboard/solicitudes', 'icono' => 'far fa-hand-paper', 'Array_1' => []],
         ];
         // ========== ========== ========== ========== ========== ========== ========== ========== ========== ========== ========== ==========
         $x = 0;
@@ -164,27 +104,20 @@ class TablaMenusSeeder extends Seeder
         }
         // -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * --
         DB::table('menu_rol')->insert(['menu_id' => 1, 'rol_id' => 2,]);
-        for ($i = 16; $i < 33; $i++) {
+        for ($i = 9; $i < 12; $i++) {
             DB::table('menu_rol')->insert(['menu_id' => $i, 'rol_id' => 2,]);
         }
+        DB::table('menu_rol')->insert(['menu_id' => 14, 'rol_id' => 2,]);
+        DB::table('menu_rol')->insert(['menu_id' => 15, 'rol_id' => 2,]);
         // -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * --
         DB::table('menu_rol')->insert(['menu_id' => 1, 'rol_id' => 3,]);
-        DB::table('menu_empresas')->insert(['menu_id' => 1, 'empresa_id' => 3,]);
-        for ($i = 11; $i < 16; $i++) {
-            DB::table('menu_rol')->insert(['menu_id' => $i, 'rol_id' => 3,]);
-            DB::table('menu_empresas')->insert(['menu_id' => $i, 'empresa_id' => 3,]);
-        }
+        DB::table('menu_rol')->insert(['menu_id' => 12, 'rol_id' => 3,]);
+        DB::table('menu_rol')->insert(['menu_id' => 13, 'rol_id' => 3,]);
         // -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * --
         DB::table('menu_rol')->insert(['menu_id' => 1, 'rol_id' => 4,]);
-        DB::table('menu_rol')->insert(['menu_id' => 16, 'rol_id' => 4,]);
-
-        for ($i = 33; $i < 39; $i++) {
-            DB::table('menu_rol')->insert(['menu_id' => $i, 'rol_id' => 4,]);
-            DB::table('menu_empresas')->insert(['menu_id' => $i, 'empresa_id' => 3,]);
-        }
+        DB::table('menu_rol')->insert(['menu_id' => 12, 'rol_id' => 4,]);
+        DB::table('menu_rol')->insert(['menu_id' => 13, 'rol_id' => 4,]);
         // -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * --
-
-
     }
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     public function sub_menu($Array_1, $x)

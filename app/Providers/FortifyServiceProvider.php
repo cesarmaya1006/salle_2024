@@ -38,7 +38,7 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('login', function (Request $request) {
             //dd($request->all());
 
-            $usuario = User::where('email',request(['email']))->first();
+            $usuario = User::where('username',request(['username']))->first();
             $usuario->setSession();
             //dd($usuario->toArray());
 

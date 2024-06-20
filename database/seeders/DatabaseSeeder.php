@@ -15,13 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TablaTiposDocuSeeder::class,
-            TablaEmpGrupos::class,
-            TablaEmpresas::class,
-            TablaAreas::class,
-            TablaCargos::class,
             TablaRolesSeeder::class,
             TablaMenusSeeder::class,
             TablaUsuariosSeeder::class,
+            TablaComponenteSeeder::class,
+            TablaSubComponenteSeeder::class,
+            TablaPropuestasSeeder::class,
 
         ]);
     }

@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Empresa\Empleado;
+use App\Models\Config\Persona;
+use App\Models\Propuestas\Propuesta;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +12,6 @@ use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -30,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -69,16 +70,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     //==================================================================================
     //----------------------------------------------------------------------------------
-    public function empleado()
+    public function persona()
     {
-        return $this->belongsTo(Empleado::class, 'id');
+        return $this->belongsTo(Persona::class, 'id');
     }
     //----------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------
-    /*public function roles()
+    //relationships One to One
+    public function propuesta()
     {
-        return $this->belongsToMany(Role::class, 'config_usuario_rol', 'config_usuario_id', 'config_rol_id')->withPivot('estado');
-    }*/
+
+        return $this->belongsTo(Propuesta::class, 'id','personas_id');
+    }
     //----------------------------------------------------------------------------------
     //==================================================================================
     //==================================================================================
@@ -90,48 +93,18 @@ class User extends Authenticatable implements MustVerifyEmail
         $roles = str_replace('"','', $roles);
         //$roles = explode(',',$roles);
         $roles = $this->roles;
+        if ($this->empleado) {
+            $nombres_completos = $this->empleado->nombres . ' ' . $this->empleado->apellidos;
+        }else{
+            $nombres_completos = $this->name;
+        }
         Session::put([
             'id_usuario' => $this->id,
+            'nombres_completos' => $nombres_completos,
+            'rol_principal' => $roles[0]['name'],
+            'rol_principal_id' => $roles[0]['id'],
             'roles' => $roles,
-            /*
-            'config_empresa_id' => $this->config_empresa_id,
-            'config_tipo_documento_id' => $this->config_tipo_documento_id,
-            'identificacion' => $this->identificacion,
-            'nombres' => $this->nombres,
-            'apellidos' => $this->apellidos,
-            'email' => $this->email,
-            'telefono' => $this->telefono,
-            'direccion' => $this->direccion,
-            'estado' => $this->estado,
-            'foto' => $this->foto,
-            'lider' => $this->lider,
-            'rol' => $rol,*/
         ]);
-        /*
-        Session::put([
-            'cant_notificaciones' => Notificacion::where('config_usuario_id',5)->count(),
-        ]);
-
-        if ($this->empleado) {
-            Session::put([
-            'empresa_cargo_id' => $this->empleado->cargo->cargo,
-            'mgl' => $this->empleado->mgl?1:0,
-            ]);
-        }
-        if ($this->empresa) {
-            Session::put([
-                'empresa' => $this->empresa->nombres,
-            ]);
-        }
-        if ($this->config_empresa_id!=null) {
-            $apariencia = ConfigApariencia::where('config_empresa_id',$this->config_empresa_id)->first();
-        } else {
-            $apariencia = ConfigApariencia::findOrFail(1);
-        }
-        Session::put([
-            'apariencia' => $apariencia,
-        ]);*/
-
     }
     //==========================================================================================
 }
