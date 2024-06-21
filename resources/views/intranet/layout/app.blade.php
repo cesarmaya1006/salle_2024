@@ -10,8 +10,7 @@
 <body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed">
     <div class="wrapper">
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('imagenes/sistema/escudo_salle.png') }}" alt="AdminLTELogo"
-                height="60" width="60">
+            <img class="animation__shake" src="{{ asset('imagenes/sistema/logo_salle_full.png') }}" alt="Salle" height="180" width="320">
         </div>
         @include('intranet.layout.header')
         @include('intranet.layout.aside')
