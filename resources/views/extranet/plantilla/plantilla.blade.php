@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/extranet/general/general.css') }}">
     <link rel="stylesheet" href="{{ asset('lte/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
-    <title>Sistema M & M</title>
+    <title>Sistema de Evaluacion -  M & M</title>
     @yield('css_pagina')
 </head>
 
