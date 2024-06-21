@@ -291,7 +291,7 @@
                                                         </div>
                                                     </div>
                                                     <form
-                                                        action="{{ route('calificar_primera_fase-guardar', ['id' => $prim_fase_componentes_id]) }}"
+                                                        action="{{ route('jurados.calificar_primera_fase_guardar', ['id' => $prim_fase_componentes_id]) }}"
                                                         class="form-horizontal row form_calificar_fase_uno" method="POST"
                                                         autocomplete="off" id="form_{{ $prim_fase_componentes_id }}">
                                                         @csrf

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -127,5 +128,17 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'MayoHelper' => App\Helpers\MayoFuncionesHelper::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
+    ])->toArray(),
+
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Service Providers...
+         */
+        Barryvdh\DomPDF\ServiceProvider::class,
     ])->toArray(),
 ];

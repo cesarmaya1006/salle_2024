@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                         <form
-                                            action="{{ route('calificar_segunda_fase-guardar', ['id' => $seg_fase_componentes_id]) }}"
+                                            action="{{ route('jurados.calificar_segunda_fase_guardar', ['id' => $seg_fase_componentes_id]) }}"
                                             class="form-horizontal row form_calificar_fase_dos" method="POST"
                                             autocomplete="off" id="form_{{ $seg_fase_componentes_id }}">
                                             @csrf
@@ -153,9 +153,9 @@
                                                         0-10</small>
                                                 </div>
                                                 <div class="col-12 col-md-9 form-group">
-                                                    <label for="observacion">Observaciones</label>
+                                                    <label class="requerido" for="observacion">Observaciones</label>
                                                     <textarea class="form-control form-control-sm" name="observacion" id="observacion_{{ $seg_fase_componentes_id }}"
-                                                        cols="30" rows="2"></textarea>
+                                                        cols="30" rows="2" required></textarea>
                                                     <small id="helpId" class="form-text text-muted">Observaciones</small>
                                                 </div>
                                             </div>

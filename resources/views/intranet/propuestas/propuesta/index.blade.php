@@ -35,6 +35,9 @@ Propuestas
             @can('intranet.propuestas.emprendedor.index')
             @include('intranet.propuestas.emprendedor.index')
             @endcan
+            @can('intranet.propuestas.jurado.index')
+            @include('intranet.propuestas.emprendedor.index')
+            @endcan
         </div>
     </div>
 @endsection

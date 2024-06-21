@@ -78,7 +78,11 @@ Administración de Propuestas
                                                 <a href="{{route('propuestas-asignar',['id' => $propuesta->id])}}" class="btn btn-danger bg-gradient btn-sombra btn-xs pl-3 pr-3">Asignar Jurados</a>
                                             @endif
                                         @else
-                                            <a href="{{route('exportar_notas',['id' => $propuesta->id])}}" class="btn btn-info bg-gradient btn-sombra btn-xs pl-3 pr-3 ml-3"><i class="fas fa-file-download    "></i> Descargar Informe</a>
+                                            <a href="{{route('exportar_notas',['id' => $propuesta->id])}}" target="_blank" class="btn btn-primary bg-gradient btn-sombra btn-sm pl-3 pr-3 ml-3"><i class="fas fa-file-download    "></i> Descargar Informe</a>
+                                            @if ($propuesta->estado==6)
+                                            <a href="{{route('exportar_notas_dos',['id' => $propuesta->id])}}" target="_blank" class="btn btn-primary bg-gradient btn-sombra btn-sm pl-3 pr-3 ml-3"><i class="fas fa-file-download    "></i> Descargar Informe Final</a>
+                                            @endif
+
                                         @endif
                                     @endif
                                 </td>

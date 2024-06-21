@@ -36,6 +36,10 @@ class JuradoController extends Controller
     public function asignacion_dos()
     {
         $jurados = User::with('persona.propuestas_j')->role('Jurado')->get();
+        $jurados = Persona::with('usuario')->with('usuario.roles')->whereHas('usuario.roles', function ($q) {
+            $q->where('id', 3);
+        })->get();
+
         $propuestas = Propuesta::where('estado',4)->orderBy('promedio_primera','desc')->take(30)->get();
         return view('intranet.propuestas.jurados.asignacion_dos',compact('jurados','propuestas'));
     }

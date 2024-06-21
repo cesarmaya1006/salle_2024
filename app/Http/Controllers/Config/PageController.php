@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
+use App\Models\Config\Persona;
 use App\Models\Propuestas\Componente;
+use App\Models\Propuestas\Propuesta;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +23,15 @@ class PageController extends Controller
         $roles = str_replace('"','', $roles);
         $roles = explode(',',$roles);
         $componentes = Componente::get();
+        $propuestas= Propuesta::get();
+        $jurados = Persona::with('usuario')->with('usuario.roles')->whereHas("usuario.roles", function($q){
+            $q->where("name", "Jurado"); })
+            ->get();
+        $emprendedores = Persona::with('usuario')->with('usuario.roles')->whereHas("usuario.roles", function($q){
+            $q->where("name", "Emprendedor"); })
+            ->get();
         //dd($usuario->toArray());
-        return view('dashboard',compact('roles','usuario','componentes'));
+        return view('dashboard',compact('roles','usuario','componentes','propuestas','jurados','emprendedores'));
     }
 
     public function profile()

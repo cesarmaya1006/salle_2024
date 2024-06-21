@@ -11,7 +11,7 @@ use App\Models\Propuestas\PrimFaseComponente;
 use App\Models\Propuestas\Propuesta;
 use App\Models\Propuestas\SubComponente;
 use App\Models\User;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Laravel\Facades\Image;
@@ -164,7 +164,7 @@ class PropuestaController extends Controller
     public function asignar_dos($id)
     {
         $jurados = Persona::with('usuario')->with('usuario.roles')->whereHas('usuario.roles', function ($q) {
-            $q->where('rol_id', 3);
+            $q->where('id', 3);
         })->get();
         $propuesta = Propuesta::findOrFail($id);
         return view('intranet.propuestas.admin.propuestas.asignacion_jurados_dos',compact('propuesta','jurados'));
@@ -382,35 +382,40 @@ class PropuestaController extends Controller
         return redirect('dashboard')->with('mensaje', 'Propuesta creada con exito');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function refrescar_notas(){
+        $propuestas = Propuesta::get();
+        foreach ($propuestas as $propuesta) {
+            $promedioPropuesta =0;
+            $sumPromedioPropuesta =0;
+            foreach ($propuesta->componentesFaseUno as $componente) {
+                $promedioComponente = 0;
+                if ($componente->notas->count()>0) {
+                    $notasSuma =0;
+                    foreach ($componente->notas as $nota) {
+                        $notasSuma+= $nota->calificacion;
+                    }
+                    $promedioComponente = $notasSuma / $componente->notas->count();
+                }
+                $primerafaseUpdate['not_promedio'] = $promedioComponente;
+                PrimFaseComponente::findOrFail($componente->id)->update($primerafaseUpdate);
+                $sumPromedioPropuesta+=$promedioComponente;
+            }
+            //-----------------------------------------------------------
+            $componentes = Componente::get();
+            $sumNotasComponente =0;
+            foreach ($componentes as $componente) {
+                $nota_componente =0;
+                foreach ($propuesta->componentesFaseUno as $componenteFaseUno) {
+                    if ($componenteFaseUno->subcomponente->componente_id == $componente->id) {
+                        $nota_componente+= $componenteFaseUno->not_promedio;
+                    }
+                }
+                $componente['promedio'] = $nota_componente/$componente->sub_componentes->count();
+                $sumNotasComponente+=$nota_componente/$componente->sub_componentes->count();
+            }
+            $propuestaUpdate['promedio_primera'] = $sumNotasComponente/$componentes->count();
+            Propuesta::findOrfail($propuesta->id)->update($propuestaUpdate);
+        }
+        return redirect('dashboard')->with('mensaje', 'Se actualizaron los promedios de las notas de manera exitosa en la plataforma');
     }
 }

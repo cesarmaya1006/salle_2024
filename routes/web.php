@@ -127,9 +127,9 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
         Route::controller(PropuestaController::class)->group(function (){
             Route::prefix('propuestas')->group(function(){
                 Route::get('asignar','asignar')->name('propuestas.asignar');
-                Route::post('asignar_guardar','asignar_guardar')->name('propuestas.asignar_guardar');
+                Route::post('asignar_guardar/{persona_id}/{propuesta_id}','asignar_guardar')->name('propuestas.asignar_guardar');
                 Route::get('asignar_dos','asignar_dos')->name('propuestas.asignar_dos');
-                Route::post('asignar_guardar_dos','asignar_guardar_dos')->name('propuestas.asignar_guardar_dos');
+                Route::post('asignar_guardar_dos/{persona_id}/{propuesta_id}','asignar_guardar_dos')->name('propuestas.asignar_guardar_dos');
 
             });
         });

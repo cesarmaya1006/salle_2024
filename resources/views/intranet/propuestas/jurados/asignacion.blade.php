@@ -54,7 +54,7 @@ Asignación de jurados a las propuestas
                                                     <input
                                                         class="form-check-input jurado_check"
                                                         type="checkbox"
-                                                        data_url="{{route('propuestas-asignar_guardar',['persona_id' => $jurado->id,'propuesta_id' => $propuesta->id])}}"
+                                                        data_url="{{route('propuestas.asignar_guardar',['persona_id' => $jurado->id,'propuesta_id' => $propuesta->id])}}"
                                                         name="persona_id"
                                                         value="{{$jurado->id}}"
                                                         id="jurado_{{$jurado->id}}"
