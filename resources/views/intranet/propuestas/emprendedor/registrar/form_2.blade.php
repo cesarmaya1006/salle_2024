@@ -5,7 +5,7 @@
         <div class="form-group">
             <label for="descripcion" class="requerido">Descripción de la propuesta</label>
             <textarea class="form-control form-control-sm" name="descripcion" id="descripcion" cols="30" rows="3"
-                maxlength="260" required data_nombre="Descripción de la propuesta">{{ $propuesta->descripcion ?? 'Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles' }}</textarea>
+                maxlength="260" required data_nombre="Descripción de la propuesta">{{ $propuesta->descripcion ?? '' }}</textarea>
             <small id="helpId" class="form-text text-muted">Maximo 30 palabras</small>
         </div>
     </div>
@@ -127,7 +127,7 @@
                                                             <textarea class="form-control form-control-sm" name="sustentacion[]"
                                                                 data_nombre="Sustentación  de {{ $sub_componente->sub_componente }}" id="sustentacion_{{ $sub_componente->id }}"
                                                                 cols="30" rows="5"data_name_simp="{{ $sub_componente->sub_componente }}"
-                                                                data_name="Sustentacion {{ $sub_componente->sub_componente }}" required>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño.</textarea>
+                                                                data_name="Sustentacion {{ $sub_componente->sub_componente }}" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,7 +230,7 @@
                                                                     class="form-control form-control-sm"
                                                                     name="video" data_nombre="Video"
                                                                     id="video_{{ $sub_componente->id }}"
-                                                                    aria-describedby="helpId" value="https://www.youtube.com/watch?v=cx5qVmtfayA" required>
+                                                                    aria-describedby="helpId" value="" required>
                                                                 <small id="helpId"
                                                                     class="form-text text-muted">Subir la url del
                                                                     video</small>
