@@ -9,6 +9,7 @@ use App\Http\Controllers\Config\RolController;
 use App\Http\Controllers\Propuestas\ComponenteController;
 use App\Http\Controllers\Propuestas\EmprendedorController;
 use App\Http\Controllers\Propuestas\JuradoController;
+use App\Http\Controllers\Propuestas\PropuestaController;
 use App\Http\Controllers\Propuestas\SubComponenteController;
 use App\Http\Controllers\Usuarios\UsuarioController;
 use App\Http\Middleware\AdminSis;
@@ -82,6 +83,7 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
     });
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     Route::middleware(AdminSis::class)->group(function () {
+        Route::get('refrescar_notas', [PropuestaController::class,'refrescar_notas',])->name('refrescar.notas');
         Route::prefix('parametros')->group(function () {
             // ----------------------------------------------------------------------------------------
             // Ruta Administrador del Sistema Roles
@@ -122,9 +124,21 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
             Route::get('', 'index')->name('emprendedores.index');
         });
         // ----------------------------------------------------------------------------------------
+        Route::controller(PropuestaController::class)->group(function (){
+            Route::prefix('propuestas')->group(function(){
+                Route::get('asignar','asignar')->name('propuestas.asignar');
+                Route::post('asignar_guardar','asignar_guardar')->name('propuestas.asignar_guardar');
+                Route::get('asignar_dos','asignar_dos')->name('propuestas.asignar_dos');
+                Route::post('asignar_guardar_dos','asignar_guardar_dos')->name('propuestas.asignar_guardar_dos');
+
+            });
+        });
+        // ----------------------------------------------------------------------------------------
+        Route::get('exportar_notas/{id}', [PropuestaController::class,'exportar_notas',])->name('exportar_notas');
+        Route::get('exportar_notas_dos/{id}', [PropuestaController::class,'exportar_notas_dos',])->name('exportar_notas_dos');
     });
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Route::prefix('configuracion')->middleware(Jurado::class)->group(function () {
+    Route::middleware(Jurado::class)->group(function () {
         // ----------------------------------------------------------------------------------------
         // Ruta Administrador del Sistema Roles
         Route::controller(JuradoController::class)->group(function () {
@@ -137,7 +151,27 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', config('jetstream.auth_s
         // ----------------------------------------------------------------------------------------
     });
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    Route::prefix('configuracion')->middleware(Emprendedor::class)->group(function () {
-    });
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // ------------------------------------------------------------------------------------
+    Route::prefix('propuestas')->group(function () {
+        Route::controller(PropuestaController::class)->group(function(){
+            //Propuestas index
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+            Route::get('', 'index')->name('propuestas.index');
+            Route::get('crear', 'crear')->name('propuestas.crear');
+            Route::get('index', 'propuestas')->name('propuestas.propuestas');
+            Route::get('propuestas-ver/{id}', 'propuestas_ver')->name('propuestas.propuestas_ver');
+
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        });
+    });
+    //-----------------------------------------------------------------------------------------------------
+    Route::prefix('propuestas')->group(function () {
+        Route::controller(PropuestaController::class)->group(function(){
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+            Route::post('guardar', 'guardar')->name('propuestas.guardar');
+
+            // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        });
+    });
 });

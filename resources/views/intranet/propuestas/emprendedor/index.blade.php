@@ -42,12 +42,12 @@ Emprendedores
                 <tbody id="cuerpo_tabla_usuarios2">
                     @foreach ($emprendedores as $emprendedor)
                         <tr>
-                            <td class="text-center text-nowrap">{{ $emprendedor->persona->id }}</td>
-                            <td class="text-center text-nowrap">{{$emprendedor->persona->identificacion}}</td>
-                            <td class="text-left text-nowrap">{{$emprendedor->persona->nombre1 . ' ' . $emprendedor->persona->nombre2 . ' ' . $emprendedor->persona->apellido1 . ' ' . $emprendedor->persona->apellido2}}</td>
-                            <td class="text-center text-nowrap">{{$emprendedor->persona->telefono}}</td>
-                            <td class="text-left text-nowrap">{{$emprendedor->persona->email}}</td>
-                            <td class="text-center text-nowrap">{{$emprendedor->persona->propuesta->estado > 1?'SI':'NO'}}</td>
+                            <td class="text-center text-nowrap">{{ $emprendedor->id }}</td>
+                            <td class="text-center text-nowrap">{{$emprendedor->identificacion}}</td>
+                            <td class="text-left text-nowrap">{{$emprendedor->nombre1 . ' ' . $emprendedor->nombre2 . ' ' . $emprendedor->apellido1 . ' ' . $emprendedor->apellido2}}</td>
+                            <td class="text-center text-nowrap">{{$emprendedor->telefono}}</td>
+                            <td class="text-left text-nowrap">{{$emprendedor->email}}</td>
+                            <td class="text-center text-nowrap">{{$emprendedor->propuesta->estado > 1?'SI':'NO'}}</td>
                         </tr>
                     @endforeach
                 </tbody>

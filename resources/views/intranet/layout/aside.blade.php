@@ -1,18 +1,20 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-image: url('{{ asset('imagenes/sistema/aside1.jpg') }}');background-repeat: no-repeat;background-size: 100% 100%;">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('dashboard') }}" class="brand-link bg-light" style="text-decoration: none;background-color: rgba(39, 39, 39, 0.8);">
-        <img src="{{asset('imagenes/sistema/logo_mgl.jpg')}}" alt="M & M" class="brand-image img-circle elevation-3" style="opacity: .8;">
-        <span class="brand-text font-weight-light"><strong>MGL - Tech</strong></span>
+    <a href="{{ route('dashboard') }}" class="brand-link bg-light pb-4" style="text-decoration: none;background-color: rgba(39, 39, 39, 0.8);">
+        <img src="{{asset('imagenes/sistema/escudo_salle_b.jpg')}}" alt="M & M" class="brand-image img-circle elevation-3" style="opacity: .8;">
+        <span class="brand-text font-weight-light"><strong>Sistema de Evaluación</strong></span>
     </a>
     <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition" style="background-color: rgba(39, 39, 39, 0.8)">
-        <div class="user-panel d-flex">
+        <div class="user-panel d-flex pt-3 pb-2">
             <div class="image">
                 <img src="{{asset('imagenes/usuarios/usuario-inicial.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info" style="font-size: 0.85em;">
-                <h5 class="text-white text-small">{{session('nombres_completos')}}</h5>
                 @if (session('rol_principal_id') < 4)
+
                     <h6 class="text-white">{{session('rol_principal')}}</h6>
+                @else
+                <h6 class="text-white text-small">{{session('nombres_completos')}}</h6>
                 @endif
             </div>
         </div>

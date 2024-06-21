@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Config;
 
 use App\Http\Controllers\Controller;
+use App\Models\Propuestas\Componente;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,9 @@ class PageController extends Controller
         $roles = substr($roles, 1);
         $roles = str_replace('"','', $roles);
         $roles = explode(',',$roles);
-
+        $componentes = Componente::get();
         //dd($usuario->toArray());
-        return view('dashboard',compact('roles'));
+        return view('dashboard',compact('roles','usuario','componentes'));
     }
 
     public function profile()

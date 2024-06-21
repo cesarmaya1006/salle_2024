@@ -1,7 +1,7 @@
 @extends('intranet.layout.app')
 
 @section('css_pagina')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css" />
+
 @endsection
 
 @section('titulo_pagina')

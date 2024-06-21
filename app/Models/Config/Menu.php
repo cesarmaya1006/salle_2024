@@ -22,11 +22,6 @@ class Menu extends Model
     }
     //---------------------------------------------------------------
     //---------------------------------------------------------------
-    public function empresas_menu ()
-    {
-        return $this->belongsToMany(Empresa::class,'menu_empresas','menu_id','empresa_id');
-    }
-    //---------------------------------------------------------------
     public function getHijos($padres, $line)
     {
         $children = [];
@@ -55,11 +50,8 @@ class Menu extends Model
                     ->get()
                     ->toArray();
             } else {
-                $id_empresa = $usuario->empleado->cargo->area->empresa_id;
                 return $this->whereHas('roles_menu', function ($query) use($ids) {
                     $query->whereIn('rol_id', $ids)->orderby('menu_id');
-                })->whereHas('empresas_menu', function ($query2) use($id_empresa) {
-                    $query2->where('empresa_id', $id_empresa)->orderby('menu_id');
                 })->orderby('menu_id')
                   ->orderby('orden')
                   ->get()

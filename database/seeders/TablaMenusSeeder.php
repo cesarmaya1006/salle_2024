@@ -115,8 +115,6 @@ class TablaMenusSeeder extends Seeder
         DB::table('menu_rol')->insert(['menu_id' => 13, 'rol_id' => 3,]);
         // -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * --
         DB::table('menu_rol')->insert(['menu_id' => 1, 'rol_id' => 4,]);
-        DB::table('menu_rol')->insert(['menu_id' => 12, 'rol_id' => 4,]);
-        DB::table('menu_rol')->insert(['menu_id' => 13, 'rol_id' => 4,]);
         // -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * -- * --
     }
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

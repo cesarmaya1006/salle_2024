@@ -55,6 +55,12 @@ class TablaRolesSeeder extends Seeder
         Permission::create(['name'=>'subcomponentes.destroy'])->syncRoles([$rol1,$rol2]);
         Permission::create(['name'=>'subcomponentes.asignacion'])->syncRoles([$rol1,$rol2]);
 
+        Permission::create(['name'=>'propuestas.index'])->syncRoles([$rol1,$rol2]);
+        Permission::create(['name'=>'intranet.propuestas.admin.index'])->syncRoles([$rol1,$rol2]);
+
+        Permission::create(['name'=>'intranet.propuestas.emprendedor.index'])->syncRoles([$rol4]);
+
+
 
     }
 }
